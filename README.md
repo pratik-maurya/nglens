@@ -1,9 +1,10 @@
 # 🅰️ NgLens (Super Angular)
 ### Interactive Visual Component & Signals Graph, Architecture Map & Health Auditor for Modern Angular Applications
 
+[![npm version](https://img.shields.io/npm/v/nglens?color=e0234e&logo=npm)](https://www.npmjs.com/package/nglens)
 [![Angular](https://img.shields.io/badge/Angular-v16%20%7C%20v17%20%7C%20v18%20%7C%20v19-e0234e?logo=angular)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Compiler%20AST-3178c6?logo=typescript)](https://www.typescriptlang.org/)
-[![CLI](https://img.shields.io/badge/CLI-Zero--Config-10b981)](https://www.npmjs.com)
+[![CLI](https://img.shields.io/badge/CLI-Zero--Config-10b981)](https://www.npmjs.com/package/nglens)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
 ---

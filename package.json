@@ -28,16 +28,16 @@
     "vscode-extension",
     "devtools"
   ],
-  "author": "Pratik",
+  "author": "Pratik Maurya",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pratik/nglens.git"
+    "url": "git+https://github.com/pratik-maurya/nglens.git"
   },
   "bugs": {
-    "url": "https://github.com/pratik/nglens/issues"
+    "url": "https://github.com/pratik-maurya/nglens/issues"
   },
-  "homepage": "https://github.com/pratik/nglens#readme",
+  "homepage": "https://github.com/pratik-maurya/nglens#readme",
   "files": [
     "dist",
     "bin",

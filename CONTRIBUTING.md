@@ -6,7 +6,7 @@ Thank you for your interest in contributing to NgLens!
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/pratik/nglens.git
+   git clone https://github.com/pratik-maurya/nglens.git
    cd nglens
    ```
 
