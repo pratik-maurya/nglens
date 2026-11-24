@@ -57,21 +57,21 @@ class NgLensUI {
           style: {
             'label': 'data(label)',
             'color': '#f0f4f8',
-            'font-size': '12px',
+            'font-size': '13px',
             'font-weight': 600,
             'text-valign': 'center',
             'text-halign': 'center',
             'text-wrap': 'wrap',
-            'text-max-width': '110px',
-            'width': 120,
-            'height': 50,
+            'text-max-width': '130px',
+            'width': 140,
+            'height': 56,
             'shape': 'round-rectangle',
             'border-width': 2,
             'border-color': '#26334d',
             'background-color': '#182030',
-            'transition-property': 'background-color, border-color, opacity, shadow-blur',
-            'transition-duration': 0.25
-          }
+            'transition-property': 'background-color, border-color, opacity',
+            'transition-duration': 0.2
+          } as any
         },
         // Component Nodes
         {
@@ -88,9 +88,10 @@ class NgLensUI {
           style: {
             'background-color': '#1b1b32',
             'border-color': '#8b5cf6',
-            'shape': 'diamond',
-            'width': 100,
-            'height': 50
+            'shape': 'round-rectangle',
+            'border-style': 'solid',
+            'width': 140,
+            'height': 56
           }
         },
         // Cyclic Nodes
@@ -189,11 +190,25 @@ class NgLensUI {
       this.handleNodeClick(node);
     });
 
+    this.cy.on('mouseover', 'node, edge', () => {
+      const container = document.getElementById('cy');
+      if (container) container.style.cursor = 'pointer';
+    });
+
+    this.cy.on('mouseout', 'node, edge', () => {
+      const container = document.getElementById('cy');
+      if (container) container.style.cursor = 'default';
+    });
+
     this.cy.on('tap', (evt) => {
       if (evt.target === this.cy) {
         this.resetHighlights();
         this.closeInspector();
       }
+    });
+
+    window.addEventListener('resize', () => {
+      this.cy.resize();
     });
   }
 
@@ -534,14 +549,36 @@ class NgLensUI {
     }
 
     listEl.innerHTML = this.data.diagnostics.map(d => `
-      <div class="diag-card diag-${d.severity}">
+      <div class="diag-card diag-${d.severity}" style="cursor: pointer;" data-related="${(d.relatedNodes || []).join(',')}" title="Click to highlight in graph">
         <div class="diag-title">
           <span>${d.severity === 'error' ? '🚨' : '⚠️'}</span>
           <span>${d.title}</span>
+          <span style="font-size: 11px; margin-left: auto; color: #94a3b8;">Click to locate ➔</span>
         </div>
         <div class="diag-desc">${d.message}</div>
       </div>
     `).join('');
+
+    listEl.querySelectorAll('.diag-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const relatedStr = card.getAttribute('data-related');
+        if (!relatedStr) return;
+        const nodeIds = relatedStr.split(',').filter(Boolean);
+        const modal = document.getElementById('audit-modal');
+        modal?.classList.add('hidden');
+
+        this.cy.batch(() => {
+          this.cy.elements().removeClass('highlighted dimmed');
+          const targetNodes = this.cy.nodes().filter(n => nodeIds.includes(n.id()));
+          if (targetNodes.length > 0) {
+            this.cy.elements().difference(targetNodes).addClass('dimmed');
+            targetNodes.addClass('highlighted');
+            this.cy.center(targetNodes);
+            this.cy.zoom(1.2);
+          }
+        });
+      });
+    });
   }
 
   private getFallbackMockData(): AnalysisResult {

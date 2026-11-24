@@ -31,9 +31,11 @@ async function buildUI() {
   const templateHtml = fs.readFileSync(path.join(rootDir, 'src', 'ui', 'index.html'), 'utf-8');
 
   // 2. Generate template with inlined CSS & JS (with placeholder for data)
+  // Use split().join() to avoid String.prototype.replace treating $` / $' / $& inside minified JS as replacement patterns
+  const safeJs = bundledJs.replace(/<\/script/gi, '<\\/script');
   const finalHtmlTemplate = templateHtml
-    .replace('/* INJECTED_CSS */', cssContent)
-    .replace('/* INJECTED_BUNDLE */', bundledJs);
+    .split('/* INJECTED_CSS */').join(cssContent)
+    .split('/* INJECTED_BUNDLE */').join(safeJs);
 
   const outputPath = path.join(distDir, 'index.html');
   fs.writeFileSync(outputPath, finalHtmlTemplate, 'utf-8');

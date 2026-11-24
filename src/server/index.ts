@@ -35,8 +35,9 @@ export class NgLensServer {
     }
 
     const template = fs.readFileSync(htmlTemplatePath, 'utf-8');
-    const dataScript = `window.__NGLENS_DATA__ = ${JSON.stringify(data)};`;
-    return template.replace('/* INJECTED_DATA */', dataScript);
+    const safeDataJson = JSON.stringify(data).replace(/<\/script/gi, '<\\/script');
+    const dataScript = `window.__NGLENS_DATA__ = ${safeDataJson};`;
+    return template.split('/* INJECTED_DATA */').join(dataScript);
   }
 
   /**
