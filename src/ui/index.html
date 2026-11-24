@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NgLens - Visual Component & Signals Graph</title>
+  <style>
+    /* INJECTED_CSS */
+  </style>
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo">🅰️</div>
+      <div>
+        <div class="brand-title">NgLens</div>
+        <div class="brand-subtitle" id="project-name">Angular Architecture Visualizer</div>
+      </div>
+    </div>
+
+    <!-- View Switcher Tabs -->
+    <div class="view-tabs">
+      <button class="tab-btn active" data-mode="all">
+        <span>🌐</span> Full Graph
+      </button>
+      <button class="tab-btn" data-mode="tree">
+        <span>🌳</span> Component Tree
+      </button>
+      <button class="tab-btn" data-mode="services">
+        <span>💉</span> Dependency Injection
+      </button>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search components, selectors...">
+      </div>
+
+      <button class="btn" id="btn-audit">
+        <span>🩺 Health Audit</span>
+        <span class="badge-counter" id="diag-btn-badge" style="display: none;">0</span>
+      </button>
+
+      <button class="btn btn-primary" id="btn-export-png">
+        <span>📷 Export PNG</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Canvas Area -->
+  <div class="main-wrapper">
+    <!-- Floating Stats Ribbon -->
+    <div class="metrics-ribbon">
+      <div class="metric-pill">
+        <span class="metric-val red" id="m-components">0</span>
+        <span class="metric-label">Components</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-val green" id="m-signals">0</span>
+        <span class="metric-label">Signals</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-val purple" id="m-services">0</span>
+        <span class="metric-label">Services</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-val green" id="m-rate">0%</span>
+        <span class="metric-label">Signal Adoption</span>
+      </div>
+    </div>
+
+    <!-- Cytoscape Graph Container -->
+    <div id="cy"></div>
+
+    <!-- Canvas Navigation Controls -->
+    <div class="canvas-controls">
+      <button class="control-btn" id="btn-zoom-in" title="Zoom In">➕</button>
+      <button class="control-btn" id="btn-zoom-out" title="Zoom Out">➖</button>
+      <button class="control-btn" id="btn-fit" title="Fit to Screen">🎯</button>
+    </div>
+
+    <!-- Legend Bar -->
+    <div class="legend-bar">
+      <div class="legend-item"><span class="legend-dot dot-component"></span> Component</div>
+      <div class="legend-item"><span class="legend-dot dot-service"></span> Service (DI)</div>
+      <div class="legend-item"><span class="legend-dot dot-cycle"></span> Circular Loop</div>
+    </div>
+
+    <!-- Inspector Drawer -->
+    <aside class="inspector-drawer closed" id="inspector-drawer">
+      <div class="inspector-header">
+        <div>
+          <div class="inspector-title" id="inspector-name">Component Details</div>
+          <span class="inspector-tag" id="inspector-type">COMPONENT</span>
+        </div>
+        <button class="close-btn" id="close-inspector">✕</button>
+      </div>
+      <div class="inspector-body" id="inspector-content">
+        <!-- Injected dynamically on click -->
+      </div>
+    </aside>
+  </div>
+
+  <!-- Diagnostics / Health Audit Modal -->
+  <div class="modal-overlay hidden" id="audit-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div style="font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+          <span>🩺</span> Architecture Health & Diagnostics
+        </div>
+        <button class="close-btn" id="close-audit">✕</button>
+      </div>
+      <div class="modal-body" id="audit-list">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* INJECTED_DATA */
+  </script>
+  <script>
+    /* INJECTED_BUNDLE */
+  </script>
+</body>
+</html>

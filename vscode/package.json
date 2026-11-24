@@ -1,0 +1,43 @@
+{
+  "name": "nglens-vscode",
+  "displayName": "NgLens - Visual Component & Signals Graph for Angular",
+  "description": "Interactive Visual Component & Signals Graph, Architecture Map & Health Auditor for Modern Angular Applications",
+  "version": "1.0.0",
+  "publisher": "pratik",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Visualization",
+    "Linters",
+    "Other"
+  ],
+  "main": "./dist/vscode/extension.js",
+  "activationEvents": [
+    "onCommand:nglens.openVisualizer"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "nglens.openVisualizer",
+        "title": "NgLens: Open Architecture & Signals Graph",
+        "icon": "$(type-hierarchy)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "nglens.openVisualizer",
+          "group": "navigation",
+          "when": "resourceExtname == .ts || resourceExtname == .html"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "nglens.openVisualizer"
+        }
+      ]
+    }
+  }
+}
