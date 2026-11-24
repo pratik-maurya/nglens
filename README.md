@@ -9,6 +9,25 @@
 
 ---
 
+## 📦 Available on npm
+
+**NgLens** is officially published and available on npm: **[https://www.npmjs.com/package/nglens](https://www.npmjs.com/package/nglens)**
+
+You can run it instantly with **zero installation** via `npx`, or download/install it globally on your machine:
+
+```bash
+# ⚡ Option 1: Run instantly with zero installation (Recommended)
+npx nglens
+
+# 💻 Option 2: Download & install globally on your system
+npm install -g nglens
+
+# 🛠️ Option 3: Install as a project devDependency in your Angular repo
+npm install --save-dev nglens
+```
+
+---
+
 ## 💡 The Pain Point
 
 As Angular has rapidly evolved with **Standalone Components**, **Signals** (`signal()`, `computed()`, `model()`, `effect()`, `input()`, `output()`), and modern functional DI (`inject()`), large applications have become significantly more reactive—and harder to mentally map.
